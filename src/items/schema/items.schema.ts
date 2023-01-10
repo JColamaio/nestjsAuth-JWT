@@ -6,10 +6,10 @@ export type ItemsDocument = Items & Document;
 
 @Schema()
 export class Items {
-    @Prop({unique:true})
+    @Prop({required: true})
     name: string;
 
-    @Prop()
+    @Prop({required: true})
     price: number;
 
     @Prop()

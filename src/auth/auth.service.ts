@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Users, UserDocument } from './schema/auth.schema';
-import { hash } from 'bcrypt'
+import { hash, compare } from 'bcrypt'
 @Injectable()
 export class AuthService {
   constructor(
@@ -19,5 +19,18 @@ export class AuthService {
 
   }
 
-  login() {}
-}
+  async login(userObjectLogin: LoginAuthDto) {
+    const { email, password } = userObjectLogin;
+    const findUser = await this.userModel.findOne({ email })
+    if(!findUser) throw new HttpException('USER NOT FOUND', HttpStatus.NOT_FOUND);
+    
+      const checkPassword = await compare(password, findUser.password);
+
+      if(!checkPassword) throw new HttpException('FORBIDDEN', HttpStatus.FORBIDDEN);
+
+      const data = findUser
+
+      return data
+    }
+  }
+

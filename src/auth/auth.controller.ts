@@ -17,15 +17,9 @@ export class AuthController {
     return this.authService.register(userObject);
   }
 
-  
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-  //   return this.authService.update(+id, updateAuthDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.authService.remove(+id);
-  // }
+  // Login Auth
+  @Post('login')
+  loginUser(@Body() userObjectLogin: LoginAuthDto) {
+    return this.authService.login(userObjectLogin)
+  }
 }

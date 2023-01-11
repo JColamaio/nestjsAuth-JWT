@@ -6,6 +6,7 @@ import { Model } from 'mongoose';
 import { Users, UserDocument } from './schema/auth.schema';
 import { hash, compare } from 'bcrypt'
 import { JwtService } from '@nestjs/jwt';
+
 @Injectable()
 export class AuthService {
   constructor(

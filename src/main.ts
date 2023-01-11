@@ -19,3 +19,5 @@ app.useGlobalPipes(new ValidationPipe())
   await app.listen(3001);
 }
 bootstrap();
+
+// Developed by JColamaio
